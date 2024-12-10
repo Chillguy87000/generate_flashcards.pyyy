@@ -1,0 +1,53 @@
+from genanki import Deck, Note, Model, Package
+
+# Définir un modèle pour les flashcards Anki
+model = Model(
+    1607392319,
+    "Flashcard Model",
+    fields=[
+        {"name": "Question"},
+        {"name": "Answer"}
+    ],
+    templates=[
+        {
+            "name": "Card 1",
+            "qfmt": "{{Question}}",
+            "afmt": "{{FrontSide}}<hr id='answer'>{{Answer}}",
+        },
+    ],
+)
+
+# Créer un deck pour les flashcards
+deck = Deck(
+    2059400113,
+    "Histoire Ouvrière et ses Représentations (Version 2)"
+)
+
+# Ajouter les cartes au deck
+flashcards = [
+    ("Selon Gérard Noiriel, qu'est-ce qu'une étude sociale doit intégrer ?", "Les représentations collectives d'un groupe."),
+    ("Comment Pierre Bourdieu décrit-il la représentation sociale ?", "Comme un enjeu de lutte qui contribue à définir ce que sont les groupes."),
+    ("Comment l'INSEE définit-elle les ouvriers ?", "Par leur niveau de qualification, la nature artisanale ou industrielle de leur travail, et leur distinction avec les salariés."),
+    ("Qu'est-ce que le paupérisme ?", "L'appauvrissement continu d'une classe sociale par rapport à la société dans son ensemble."),
+    ("Quelle est la conséquence du paupérisme sur la bourgeoisie ?", "Il est perçu comme une menace sociale et politique."),
+    ("Qu'est-ce que le mouvement ouvrier ?", "Un ensemble d’organisations et de mobilisations qui défendent les revendications du monde ouvrier."),
+    ("Quelles ont été les principales conquêtes du Front populaire en 1936 ?", "Hausse des salaires de 12 %, réduction du temps de travail à 40 heures, congés payés, et nationalisation des usines d’armement."),
+    ("Quels secteurs ont absorbé la main-d'œuvre agricole après la guerre ?", "L'industrie et le bâtiment."),
+    ("Qu'est-ce que la loi du '1 % logement' ?", "Une contribution des employeurs pour financer la construction de logements sociaux ou des aides au logement."),
+    ("Qu'est-ce que le mouvement des quartiers Castor ?", "Des ouvriers construisant eux-mêmes leurs logements après la guerre."),
+    ("Quel a été l'impact des années 1980 sur les ouvriers ?", "Une montée du chômage, des restructurations industrielles, et une dégradation des conditions de travail."),
+    ("Qu'est-ce que le toyotisme ?", "Un mode d'organisation du travail basé sur la mécanisation et l'intensification des tâches."),
+    ("Quelle est la tendance actuelle concernant les ouvriers dans les médias ?", "Une diminution de leur représentation et une focalisation sur les faits divers."),
+    ("Qu'est-ce que la muséification des espaces ouvriers ?", "La conservation d'anciens sites industriels comme patrimoine touristique."),
+    ("Comment Pierre Bourdieu décrit-il la classe ouvrière aujourd'hui ?", "Une classe dépossédée du pouvoir de définir sa propre identité.")
+]
+
+for question, answer in flashcards:
+    note = Note(
+        model=model,
+        fields=[question, answer]
+    )
+    deck.add_note(note)
+
+# Sauvegarder le fichier Anki au format APKG
+Package(deck).write_to_file("Histoire_Ouvrière_Représentations_v2.apkg")
